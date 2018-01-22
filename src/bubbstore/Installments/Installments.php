@@ -7,7 +7,7 @@ use bubbstore\Installments\InstallmentsException;
 class Installments
 {
 
-	/**
+    /**
      * @var array
      */
     private $taxes;
@@ -127,7 +127,6 @@ class Installments
      */
     public function get()
     {
-
         $installments = [];
 
         if (count($this->getTaxes()) == 0) {
@@ -141,10 +140,10 @@ class Installments
 
             $installmentByTax = $installment <= $this->getMaxInstallmentsWithoutTax() ? 0 : $installment - $this->getMaxInstallmentsWithoutTax();
 
-            $total = $this->getAmount() * pow(( 1 + ( $this->getTaxes()[$key]['tax'] / 100 ) ), $installmentByTax);
+            $total = $this->getAmount() * pow((1 + ($this->getTaxes()[$key]['tax'] / 100)), $installmentByTax);
 
             // Apply discount
-            $total = $total - ( $total * $discount ) / 100;
+            $total = $total - ($total * $discount) / 100;
             $totalFormated = sprintf('%s %s', $this->getSymbol(), number_format($total, 2, ',', '.'));
 
             $taxValue = $total - $this->getAmount();
@@ -211,7 +210,6 @@ class Installments
      */
     public function getValuesByInstallment($installment)
     {
-
         if (isset($this->get()['installments'][$installment-1])) {
             return $this->get()['installments'][$installment-1];
         }
