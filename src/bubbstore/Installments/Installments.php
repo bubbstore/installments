@@ -130,7 +130,7 @@ class Installments
         $installments = [];
 
         if (!is_array($this->getTaxes())) {
-            throw new InstallmentsException('$taxes must by an array.');
+        	throw new InstallmentsException('$taxes precisar ser um array.');
         }
 
         if (count($this->getTaxes()) == 0) {
