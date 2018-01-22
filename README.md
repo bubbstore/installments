@@ -2,6 +2,8 @@
 
 Biblioteca que facilita a manipulação de parcelamento de valores.
 
+[![StyleCI](https://styleci.io/repos/118332986/shield?branch=master)](https://styleci.io/repos/118332986)
+
 ## Instalação via composer
 
 `composer require bubbstore/installments`
