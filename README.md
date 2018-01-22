@@ -6,23 +6,25 @@ Biblioteca que facilita a manipulação de parcelamento de valores.
 
 ## Instalação via composer
 
-`composer require bubbstore/installments`
+```bash
+$ composer require bubbstore/installments
+```
 
 ## Como utilizar
 
 ```php
 <?php
 
-use bubbstore\Installments;
-use bubbstore\Exceptions\InstallmentsException;
+use bubbstore\Installments\Installments;
+use bubbstore\Installments\Exceptions\InstallmentsException;
 
 try {
 
 	// Definimos um array com as taxas e descontos para cada número de parcela 
 	$taxes = [
 		['installment' => 1, 'percent_discount' => 0, 'tax' => 0],
-	    ['installment' => 2, 'percent_discount' => 0, 'tax' => 0],
-	    ['installment' => 3, 'percent_discount' => 0, 'tax' => 0],
+		['installment' => 2, 'percent_discount' => 0, 'tax' => 0],
+		['installment' => 3, 'percent_discount' => 0, 'tax' => 0],
 	];
 	
 	$installments = new Installments;
@@ -43,14 +45,15 @@ O resultado esperado será:
 
 ```json
 {  
-   "max_installment":3,
-   "max_installment_value":66.67,
-   "amount":200,
-   "text":"3x de R$ 66,67 sem juros",
-   "text_with_tax":"3x de R$ 66,67",
-   "text_discount_percent":null,
-   "text_discount":null,
-   "installments":[  
+	"max_installment":3,
+	"max_installment_value":66.67,
+	"amount":200,
+	"text":"3x de R$ 66,67 sem juros",
+	"text_with_tax":"3x de R$ 66,67",
+	"text_discount_percent":null,
+	"text_discount":null,
+	"installments":
+	[  
 		{  
 			"amount":200,
 			"amount_formated":"R$ 200,00",

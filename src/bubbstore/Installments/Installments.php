@@ -2,7 +2,7 @@
 
 namespace bubbstore\Installments;
 
-use bubbstore\Installments\InstallmentsException;
+use bubbstore\Installments\Exceptions\InstallmentsException;
 
 class Installments
 {
@@ -129,10 +129,14 @@ class Installments
     {
         $installments = [];
 
+        if (!is_array($this->getTaxes())) {
+            throw new InstallmentsException('$taxes must by an array.');
+        }
+
         if (count($this->getTaxes()) == 0) {
             return null;
         }
-        
+
         for ($i = 1; $i <= count($this->getTaxes()); $i++) {
             $key = $i-1;
             $installment = $this->getTaxes()[$key]['installment'];
