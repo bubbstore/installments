@@ -142,17 +142,19 @@ class Installments
             $installment = $this->getTaxes()[$key]['installment'];
             $discount = $this->getTaxes()[$key]['percent_discount'];
 
-            $installmentByTax = $installment <= $this->getMaxInstallmentsWithoutTax() ? 0 : $installment - $this->getMaxInstallmentsWithoutTax();
+            $installmentByTax = $installment <= $this->getMaxInstallmentsWithoutTax() ? 0 : $this->getTaxes()[$key]['tax'];
 
-            $total = $this->getAmount() * pow((1 + ($this->getTaxes()[$key]['tax'] / 100)), $installmentByTax);
+            $percentTax = $installmentByTax / 100;
+
+            $installmentValue = $percentTax > 0 ? ($this->getAmount() * $percentTax) / (1 - pow((1 + $percentTax), -$installment)) : $this->getAmount() / $installment;
+
+            $total = $installmentValue * $installment;
 
             // Apply discount
             $total = $total - ($total * $discount) / 100;
             $totalFormated = sprintf('%s %s', $this->getSymbol(), number_format($total, 2, ',', '.'));
 
             $taxValue = $total - $this->getAmount();
-
-            $installmentValue = $total / $installment;
 
             if ($installmentValue >= $this->getMinInstallmentValue() || $installment == 1) {
                 $installmentValueFormated = sprintf('%s %s', $this->getSymbol(), number_format($installmentValue, 2, ',', '.'));
